@@ -10,7 +10,7 @@ import {
   GraphQLSchema,
 } from 'graphql';
 
-import { imputationType } from './imputation';
+import { TicketType } from './ticket';
 // ----------------------
 
 // GraphQL can handle Promises from its `resolve()` calls, so we'll create a
@@ -47,45 +47,6 @@ const Message = new GraphQLObjectType({
 
 // Message type.  Imagine this like static type hinting on the 'message'
 // object we're going to throw back to the user
-
-const TicketType = new GraphQLObjectType({
-  name: 'Ticket',
-  description: 'One Ticket',
-  fields() {
-    return {
-      id: {
-        type: GraphQLString,
-        resolve(ticket) {
-          return ticket.id;
-        },
-      },
-      openAt: {
-        type: GraphQLString,
-        resolve(ticket) {
-          return ticket.openAt;
-        },
-      },
-      updateAt: {
-        type: GraphQLString,
-        resolve(ticket) {
-          return ticket.updateAt;
-        },
-      },
-      closeAt: {
-        type: GraphQLString,
-        resolve(ticket) {
-          return ticket.closeAt;
-        },
-      },
-      imputation: {
-        type: imputationType,
-        resolve(ticket) {
-          return ticket.closeAt;
-        },
-      },
-    };
-  },
-});
 
 // Root query.  This is our 'public API'.
 const Query = new GraphQLObjectType({
