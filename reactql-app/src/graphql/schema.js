@@ -6,11 +6,11 @@
 // GraphQL schema library, for building our GraphQL schema
 import {
   GraphQLObjectType,
-  GraphQLString,
   GraphQLSchema,
 } from 'graphql';
 
-import { TicketType } from './ticket';
+import { ticketType } from './ticket';
+import { messageType } from './message';
 // ----------------------
 
 // GraphQL can handle Promises from its `resolve()` calls, so we'll create a
@@ -19,6 +19,8 @@ import { TicketType } from './ticket';
 async function getMessage() {
   return {
     text: `Hello from the GraphQL server @ ${new Date()}`,
+    author: 'toto',
+    createAt: `${new Date()}`,
   };
 }
 
@@ -30,23 +32,6 @@ async function getTickets() {
 
 // Message type.  Imagine this like static type hinting on the 'message'
 // object we're going to throw back to the user
-const Message = new GraphQLObjectType({
-  name: 'Message',
-  description: 'GraphQL server message',
-  fields() {
-    return {
-      text: {
-        type: GraphQLString,
-        resolve(msg) {
-          return msg.text;
-        },
-      },
-    };
-  },
-});
-
-// Message type.  Imagine this like static type hinting on the 'message'
-// object we're going to throw back to the user
 
 // Root query.  This is our 'public API'.
 const Query = new GraphQLObjectType({
@@ -55,13 +40,13 @@ const Query = new GraphQLObjectType({
   fields() {
     return {
       message: {
-        type: Message,
+        type: messageType,
         resolve() {
           return getMessage();
         },
       },
       ticket: {
-        type: TicketType,
+        type: ticketType,
         resolve() {
           return getTickets();
         },

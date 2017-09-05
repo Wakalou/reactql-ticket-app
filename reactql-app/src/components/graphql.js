@@ -34,6 +34,7 @@ export default class GraphQLMessage extends React.PureComponent {
     data: PropTypes.shape({
       message: PropTypes.shape({
         text: PropTypes.string,
+        author: PropTypes.string,
       }),
     }),
   }
@@ -42,6 +43,7 @@ export default class GraphQLMessage extends React.PureComponent {
     data: {
       message: {
         text: null,
+        author: null,
       },
     },
   }
@@ -52,7 +54,7 @@ export default class GraphQLMessage extends React.PureComponent {
     // Since we're dealing with async GraphQL data, we defend against the
     // data not yet being loaded by checking to see that we have the `message`
     // key on our returned object
-    const message = data.message && data.message.text;
+    const message = data.message && data.message.text + data.message.author;
 
     // Apollo will tell us whether we're still loading.  We can also use this
     // check to ensure we have a fully returned response
