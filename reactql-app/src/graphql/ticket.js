@@ -5,7 +5,7 @@ import {
 } from 'graphql';
 
 import { imputationType } from './imputation';
-
+import { alertType } from './alert';
 
 export const TicketType = new GraphQLObjectType({
   name: 'Ticket',
@@ -40,6 +40,12 @@ export const TicketType = new GraphQLObjectType({
         type: imputationType,
         resolve(ticket) {
           return ticket.imputation;
+        },
+      },
+      alert: {
+        type: alertType,
+        resolve(ticket) {
+          return ticket.alert;
         },
       },
     };
