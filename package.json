@@ -1,0 +1,5 @@
+{
+  "dependencies": {
+    "reactql": "^4.7.0"
+  }
+}
